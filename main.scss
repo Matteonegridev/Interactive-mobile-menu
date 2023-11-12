@@ -1,0 +1,137 @@
+$red: #cb0606;
+$white: #fefefe;
+$black: #202020;
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+a,
+a:visited,
+a:link {
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  background: $red;
+  min-height: 70px;
+  z-index: 2;
+}
+// here menu__icon crea l'interazione
+// here il padding ingrandisce la zone cliccabile
+.menu__icon {
+  position: relative;
+  padding: 15px 5px;
+  top: 20px;
+  right: 16px;
+  float: right;
+  cursor: pointer;
+  z-index: 3;
+}
+//here burger__menu stilizza soltanto il menu
+//here l'interazione viene data dal menu__icon
+.burger__menu {
+  float: right;
+  width: 20px;
+  height: 2px;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  transition: all 250ms ease-in;
+  background: $white;
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    transition: all 250ms ease-in;
+    background: $white;
+    width: 20px;
+    height: 2px;
+  }
+  &::before {
+    top: -8px;
+    transition: all 250ms ease-in-out;
+  }
+  &::after {
+    top: 8px;
+    transition: all 250ms ease-in-out;
+  }
+}
+//here nasconde il checkbox
+.menu__btn {
+  display: none;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  transform: translateX(-100%);
+  transition: transform 500ms ease-in-out;
+  z-index: 0;
+}
+.navbar__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100vh;
+  background: $red;
+}
+li {
+  padding: 1.8rem;
+  //here prende tutto lo spazio in orizzontale
+  text-align: center;
+  width: 100%;
+
+  &:hover {
+    background: hsl(0, 66%, 58%);
+  }
+}
+a {
+  color: $white;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+}
+
+.menu__btn:checked ~ nav {
+  // left: 0;
+  transform: translateX(0);
+  transition: transform 500ms ease-in-out;
+}
+.menu__btn:checked ~ .menu__icon .burger__menu::before {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+.menu__btn:checked ~ .menu__icon .burger__menu::after {
+  transform: rotate(45deg);
+  top: 0;
+}
+.menu__btn:checked ~ .menu__icon .burger__menu {
+  background: transparent;
+}
+
+//! CREARE MEDIA QUERY PER MENU CON MIN-WIDTH SCREEN
